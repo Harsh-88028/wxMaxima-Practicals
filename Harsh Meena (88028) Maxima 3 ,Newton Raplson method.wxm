@@ -1,0 +1,86 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 22.04.0 ] */
+/* [wxMaxima: title   start ]
+Harsh Meena (88028)
+
+PRACTICAL -3 :
+   [wxMaxima: title   end   ] */
+
+
+/* [wxMaxima: title   start ]
+Newton Raplson Method:
+   [wxMaxima: title   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Q1) f(x) =  cos(x) - 4x + 3 ,  f(x)=0 has a root near x = 4 , stating with x0 = 4.
+
+Ans.)
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill(all)$
+f(x) := cos(x) - 4*x + 3;
+define(df(x),diff(f(x),x));
+'x0 = x0:4;
+for i:1 thru 4 do (
+    if (equal(f(x0),0)) then return()
+    else float(x1:(x0 - f(x0)/df(x0))),
+    x0:x1,
+    print("iteration",i,"=>",'x = float(x1))
+)$
+print('x = float(x1))$
+wxplot2d(f(x),[x,9.5,10]);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Q2) f(x) = cos(x^2) - 1 , f(x)=0 has a root near x = 1 , stating with x0 = 1.
+
+Ans.)
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill(all)$
+f(x) := cos(x^2) - 1;
+define(df(x),diff(f(x),x));
+'x0 = x0:1;
+for i:1 thru 4 do (
+    if (equal(f(x0),0)) then return()
+    else float(x1:(x0 - f(x0)/df(x0))),
+    x0:x1,
+    print("iteration",i,"=>",'x = float(x1))
+)$
+print('x = float(x1))$
+wxplot2d(f(x),[x,9.5,10]);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Q3) f(x) =  cos(x) - sin(x) ,  f(x)=0 has a root near x = 1 , stating with x0 = 1.
+
+Ans.)
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill(all)$
+f(x) := cos(x) - sin(x);
+define(df(x),diff(f(x),x));
+'x0 = x0:1;
+for i:1 thru 4 do (
+    if (equal(f(x0),0)) then return()
+    else float(x1:(x0 - f(x0)/df(x0))),
+    x0:x1,
+    print("iteration",i,"=>",'x = float(x1))
+)$
+print('x = float(x1))$
+wxplot2d(f(x),[x,9.5,10]);
+/* [wxMaxima: input   end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 22.04.0"$

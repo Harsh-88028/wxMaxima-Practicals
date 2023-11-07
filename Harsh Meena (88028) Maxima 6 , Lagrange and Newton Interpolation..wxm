@@ -1,0 +1,232 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 22.04.0 ] */
+/* [wxMaxima: title   start ]
+Harsh Meena (88028)
+
+PRACTICAL -6 :
+   [wxMaxima: title   end   ] */
+
+
+/* [wxMaxima: title   start ]
+6(a). Lagrange Interpolation:
+   [wxMaxima: title   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Q1.) Construct lagrange interpolation polynomial p(x) for the data.
+x = 1 , 4 , 6 , 2
+y =  5 , 0 , 3 , 2
+Ans.)
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill(all)$
+p = p: [
+ [1, 5],
+ [4, 0],
+ [6, 3],
+ [2, 2] 
+];
+n: length(p)$
+Y: 0$
+for i: 1 thru n do (
+    L_i: 1,
+    for j: 1 thru n do (
+        if notequal(i, j) then L_i: L_i · (x − p[j][1]) / (p[i][1] − p[j][1])
+ ),
+    Y: Y + L_i · p[i][2],
+    print("iteration", i, "=>", Y, "=>", expand(Y))
+)$
+'p(x) = p: expand(Y);
+print("p(5) =", ev(p, x = 5))$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Q2) Construct lagrange interpolation polynomial p(x) for the data.
+x = -2 , 0 , 2 
+y =  4 , 3 , 6 
+
+Ans.) 
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill(all)$
+p = p: [
+ [-2, 4],
+ [0, 3],
+ [2, 6]
+];
+n: length(p)$
+Y: 0$
+for i: 1 thru n do (
+    L_i: 1,
+    for j: 1 thru n do (
+        if notequal(i, j) then L_i: L_i · (x − p[j][1]) / (p[i][1] − p[j][1])
+    ),
+    Y: Y + L_i · p[i][2],
+    print("iteration", i, "=>", Y, "=>", expand(Y))
+)$
+'p(x) = p: expand(Y);
+print("p(5) =", ev(p, x = 5))$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Q3.) Construct lagrange interpolation polynomial p(x) for the data.
+x = 2 , 7 , 9 , 14
+y =  0 , 1 , 2 , 3
+Ans.)
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill(all)$
+p = p: [
+ [2, 0],
+ [7, 1],
+ [9, 2],
+ [14, 3] 
+];
+n: length(p)$
+Y: 0$
+for i: 1 thru n do (
+    L_i: 1,
+    for j: 1 thru n do (
+        if notequal(i, j) then L_i: L_i · (x − p[j][1]) / (p[i][1] − p[j][1])
+    ),
+    Y: Y + L_i · p[i][2],
+    print("iteration", i, "=>", Y, "=>", expand(Y)) 
+)$
+'p(x) = p: expand(Y);
+print("p(5) =", ev(p, x = 5))$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: title   start ]
+6(b). Newton Interpolation:
+   [wxMaxima: title   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Q1. Construct the Newton's interpolation polynomial p(x) for the
+following given data:
+ x | 1 | 4 | 6 | 8 |
+--------------------------
+ f(x) | 1 | 2 | 5 | 7 |
+
+Ans.)
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill ( all ) $
+x : [ 1 , 4 , 6 , 8 ] ; 
+y : zeromatrix ( 4 , 4 ) $ 
+y [ 1 ] [ 1 ] : 1 $ 
+y [ 2 ] [ 1 ] : 2 $
+y [ 3 ] [ 1 ] : 5 $
+y [ 4 ] [ 1 ] : 7 $
+' y = y ;
+n : length ( x ) $
+for j : 2 thru n do (
+    for i : 1 thru n − j + 1 do (
+        y [ i ] [ j ] : ( y [ i + 1 ] [ j − 1 ] − y [ i ] [ j − 1 ] ) / ( x [ i + j − 1 ] − x [ i ] )
+    )
+)$
+' b = y ; 
+x_t : 1 $
+p : y [ 1 ] [ 1 ] $          
+for j : 1 thru n − 1 do (
+    x_t : x_t · ( ' x − x [ j ] ) ,
+    p : p + y [ 1 ] [ j + 1 ] · x_t ,
+    print ( "iteration" , j , "=>" , p , "=>" , expand ( p ) )
+)$                 
+' p ( ' x ) = expand ( p ) ;
+print ( "p(3 / 2) =" , ev ( p , x = 3 / 2 ) ) $
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Q2. Construct the Newton's interpolation polynomial p(x) for the
+following given data:
+ x | 3 | 4 | 5 | 8 |
+--------------------------
+ f(x) | 3 | 4 | 5 | 6 |
+
+Ans.)
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill ( all ) $
+x : [ 3 , 4 , 5 , 8 ] ; 
+y : zeromatrix ( 4 , 4 ) $ 
+y [ 1 ] [ 1 ] : 3 $ 
+y [ 2 ] [ 1 ] : 4 $
+y [ 3 ] [ 1 ] : 5 $
+y [ 4 ] [ 1 ] : 6 $
+' y = y ;
+n : length ( x ) $
+for j : 2 thru n do (
+    for i : 1 thru n − j + 1 do (
+        y [ i ] [ j ] : ( y [ i + 1 ] [ j − 1 ] − y [ i ] [ j − 1 ] ) / ( x [ i + j − 1 ] − x [ i ] )
+    )
+)$
+' b = y ; 
+x_t : 1 $
+p : y [ 1 ] [ 1 ] $          
+for j : 1 thru n − 1 do (
+    x_t : x_t · ( ' x − x [ j ] ) ,
+    p : p + y [ 1 ] [ j + 1 ] · x_t ,
+    print ( "iteration" , j , "=>" , p , "=>" , expand ( p ) )
+) $
+' p ( ' x ) = expand ( p ) ;
+print ( "p(3 / 2) =" , ev ( p , x = 3 / 2 ) ) $
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Q3. Construct the Newton's interpolation polynomial p(x) for the
+following given data:
+ x | 2 | 3 | 4 | 5 |
+--------------------------
+ f(x) | 3 | 2 | 1 | 0 |
+
+Ans.)
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill ( all ) $
+x : [ 2 , 3 , 4 , 5 ] ; 
+y : zeromatrix ( 4 , 4 ) $ 
+y [ 1 ] [ 1 ] : 3 $ 
+y [ 2 ] [ 1 ] : 2 $
+y [ 3 ] [ 1 ] : 1 $
+y [ 4 ] [ 1 ] : 0 $
+' y = y ;
+n : length ( x ) $
+for j : 2 thru n do (
+    for i : 1 thru n − j + 1 do (
+        y [ i ] [ j ] : ( y [ i + 1 ] [ j − 1 ] − y [ i ] [ j − 1 ] ) / ( x [ i + j − 1 ] − x [ i ] )
+    )
+) $
+' b = y ; 
+x_t : 1 $
+p : y [ 1 ] [ 1 ] $          
+for j : 1 thru n − 1 do (
+    x_t : x_t · ( ' x − x [ j ] ) ,
+    p : p + y [ 1 ] [ j + 1 ] · x_t ,
+    print ( "iteration" , j , "=>" , p , "=>" , expand ( p ) )
+)$                 
+' p ( ' x ) = expand ( p ) ;
+print ( "p(3 / 2) =" , ev ( p , x = 3 / 2 ) ) $
+/* [wxMaxima: input   end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 22.04.0"$
