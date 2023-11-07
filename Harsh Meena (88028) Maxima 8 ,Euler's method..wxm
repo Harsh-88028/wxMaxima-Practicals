@@ -1,0 +1,107 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 22.04.0 ] */
+/* [wxMaxima: title   start ]
+Harsh Meena (88028)
+
+PRACTICAL -8 :
+   [wxMaxima: title   end   ] */
+
+
+/* [wxMaxima: title   start ]
+Euler methods for solving first order initial value problems of ODE's :
+   [wxMaxima: title   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Q1) Consider the IVP dy/dx= x+4y with y(0)=3.
+ Find the approximatedvalue of y at 0.8 or y(0.8) with
+step size 0.2. 
+
+Ans.)
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill(all)$
+f(x,y):=x + 4*y;
+x0:0;
+y0:3;
+xn:0.8;
+n:4;
+h:0.2;
+print(" ","x0"," ","y0"," ","f(x0, y0)"," ","yn")$;
+for i:1 thru n do (
+    slope:f(x0,y0),
+    yn[i]:y0+h·slope,
+    print(i," iteration"),
+    print(" ", x0," ",y0," ",slope," ",yn[i]),
+    y0:yn[i],
+    x0:x0+h
+);
+print("The approximation y(0.8)=", yn[n])$;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Q2) Find the roots of the function dy/dx = tan(x) - 2y  with y(0)=1.
+ Find the approximatedvalue of y at 0.5 or y(0.5) with
+step size 0.1. 
+
+Ans.)
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill(all)$
+f(x,y):=tan(x) - 2*y;
+x0:0;
+y0:1;
+xn:0.5;
+n:5;
+h:0.1;
+print(" ","x0"," ","y0"," ","f(x0, y0)"," ","yn")$;
+for i:1 thru n do (
+    slope:f(x0,y0),
+    yn[i]:y0+h·slope,
+    print(i," iteration"),
+    print(" ", x0," ",y0," ",slope," ",yn[i]),
+    y0:yn[i],
+    x0:x0+h
+);
+print("The approximation y(0.5)=", yn[n])$;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Q3) Find the roots of the function dy/dx = sin(x) + cos(x)  +y  with y(0)=4.
+ Find the approximatedvalue of y at 0.6 or y(0.6) with
+step size 0.1. 
+
+Ans.)
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill(all)$
+f(x,y):=sin(x) + cos(x) + y;
+x0:0;
+y0:4;
+xn:0.6;
+n:6;
+h:0.1;
+print(" ","x0"," ","y0"," ","f(x0, y0)"," ","yn")$;
+for i:1 thru n do (
+    slope:f(x0,y0),
+    yn[i]:y0+h·slope,
+    print(i," iteration"),
+    print(" ", x0," ",y0," ",slope," ",yn[i]),
+    y0:yn[i],
+    x0:x0+h
+);
+print("The approximation y(0.6)=", yn[n])$;
+/* [wxMaxima: input   end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 22.04.0"$

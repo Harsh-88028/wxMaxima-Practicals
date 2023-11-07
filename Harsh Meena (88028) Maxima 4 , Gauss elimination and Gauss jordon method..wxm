@@ -1,0 +1,435 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 22.04.0 ] */
+/* [wxMaxima: title   start ]
+Harsh Meena (88028)
+
+PRACTICAL -4 :
+   [wxMaxima: title   end   ] */
+
+
+/* [wxMaxima: title   start ]
+4(a). Gauss Elemination Method:
+   [wxMaxima: title   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Q1) Solve the system of equations
+1.x1 + 2.x2 + 3.x3 = 1
+2.x1 + 6.x2 + 10.x3 = 0
+3.x1 + 14.x2 + 28.x3 = -8
+using the Gauss elimination method.
+
+Ans.)
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+Kill ( all ) $
+keepfloat : true $
+' A = A : matrix (
+       [ 1 , 2 , 3 ] ,
+       [ 2 , 6 , 10 ] ,
+       [ 3 , 14 , 28 ] ) $
+' B = B : matrix (
+       [ 1 ] , [ 0 ] , [ -8 ] ) $
+' X = X : matrix (
+       [ ' x ] , [ ' y ] , [ ' z ] ) $
+
+print ( "Let" , ' A = A , "," , ' B = B , "," , ' X = X ) $
+print ( "" ) $
+print ( "Now, the augmented matrix will be," ) $
+print ( "" ) $
+' Aug = Aug : addcol ( A , B ) ;
+
+print ( "" ) $
+print ( "I. FORWARD ELIMINATION" ) $
+
+n : length ( A [ 1 ] ) $
+
+for k : 1 thru n − 1 do (
+    max_i : k ,
+    for i : k thru n do (
+        if abs ( Aug [ i , k ] ) > abs ( Aug [ max_i , k ] ) then max_i : i
+    ) ,
+    if max_i # k then (
+        [ Aug [ k ] , Aug [ max_i ] ] : [ Aug [ max_i ] , Aug [ k ] ] ,
+        print ( "" ) ,
+        print ( "=> R" , k , "< -- >" , "R" , max_i ) ,
+        print ( Aug )
+   ) ,
+    for i : k + 1 thru n do (
+        factor : Aug [ i , k ] / Aug [ k , k ] ,
+        print ( "" ) ,
+        print ( "=> R" , i , "= R" , i , "- (" , ' Aug [ i , k ] / ' Aug [ k , k ] , ")*" , "R" , k ) ,
+        Aug [ i ] : Aug [ i ] − factor · Aug [ k ] ,
+        print ( Aug )
+    )
+) $
+
+print ( "" ) $
+print ( "Therefore, the augmented matrix" ) $
+print ( "reduced to upper triangular form will be," ) $
+print ( "" ) $
+Aug ;
+
+print ( "" ) $
+print ( "Now, the system of equations will be," ) $
+load ( "eigen" ) $
+AA : innerproduct ( submatrix ( Aug , n + 1 ) , X ) $
+BB : col ( Aug , n + 1 ) $
+for i : 1 thru n do (
+    print ( AA [ i , 1 ] = BB [ i , 1 ] )
+) $
+
+print ( "" ) $
+print ( "II. BACKWARD SUSTITUTION" ) $
+print ( "" ) $
+
+X1 : zeromatrix ( n , 1 ) $
+X1 [ n , 1 ] : float ( Aug [ n , n + 1 ] / Aug [ n , n ] ) $
+print ( X [ n , 1 ] , "=" ) $
+display ( float ( Aug [ n , n + 1 ] ) / Aug [ n , n ] ) $
+
+i : n − 1 $
+while ( i >=  1 ) do (
+    X1 [ i , 1 ] : Aug [ i , n + 1 ] ,
+    for k : i + 1 thru n do (
+        X1 [ i , 1 ] : X1 [ i , 1 ] − Aug [ i , k ] · X1 [ k , 1 ]
+    ) ,
+    print ( "" ) ,
+    print ( X [ i , 1 ] , "=" ) ,
+    display ( X1 [ i , 1 ] / Aug [ i , i ] ) ,
+    X1 [ i , 1 ] : float ( X1 [ i , 1 ] / Aug [ i , i ] ) ,
+    i : i − 1
+) $
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Q2) Solve the system of equations
+22.x1 + 6.x2 - 1.x3 = 85
+6.x1 + 13.x2 + 2.x3 = 72
+1.x1 + 1.x2 + 54.x3 = 110
+using the Gauss elimination method.
+
+Ans.)
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+Kill ( all ) $
+keepfloat : true $
+' A = A : matrix (
+       [ 22 , 6 , -1 ] ,
+       [ 6 , 13 , 2 ] ,
+       [ 1 , 1 , 54 ] ) $
+' B = B : matrix (
+       [ 85 ] , [ 72 ] , [ 110 ] ) $
+' X = X : matrix (
+       [ ' x ] , [ ' y ] , [ ' z ] ) $
+
+print ( "Let" , ' A = A , "," , ' B = B , "," , ' X = X ) $
+print ( "" ) $
+print ( "Now, the augmented matrix will be," ) $
+print ( "" ) $
+' Aug = Aug : addcol ( A , B ) ;
+
+print ( "" ) $
+print ( "I. FORWARD ELIMINATION" ) $
+
+n : length ( A [ 1 ] ) $
+
+for k : 1 thru n − 1 do (
+    max_i : k ,
+    for i : k thru n do (
+        if abs ( Aug [ i , k ] ) > abs ( Aug [ max_i , k ] ) then max_i : i
+    ) ,
+    if max_i # k then (
+        [ Aug [ k ] , Aug [ max_i ] ] : [ Aug [ max_i ] , Aug [ k ] ] ,
+        print ( "" ) ,
+        print ( "=> R" , k , "< -- >" , "R" , max_i ) ,
+        print ( Aug )
+    ) ,
+    for i : k + 1 thru n do (
+        factor : Aug [ i , k ] / Aug [ k , k ] ,
+        print ( "" ) ,
+        print ( "=> R" , i , "= R" , i , "- (" , ' Aug [ i , k ] / ' Aug [ k , k ] , ")*" , "R" , k ) ,
+        Aug [ i ] : Aug [ i ] − factor · Aug [ k ] ,
+        print ( Aug )
+    )
+) $
+
+print ( "" ) $
+print ( "Therefore, the augmented matrix" ) $
+print ( "reduced to upper triangular form will be," ) $
+print ( "" ) $
+Aug ;
+
+print ( "" ) $
+print ( "Now, the system of equations will be," ) $
+load ( "eigen" ) $
+AA : innerproduct ( submatrix ( Aug , n + 1 ) , X ) $
+BB : col ( Aug , n + 1 ) $
+for i : 1 thru n do (
+    print ( AA [ i , 1 ] = BB [ i , 1 ] )
+) $
+
+print ( "" ) $
+print ( "II. BACKWARD SUSTITUTION" ) $
+print ( "" ) $
+
+X1 : zeromatrix ( n , 1 ) $
+X1 [ n , 1 ] : float ( Aug [ n , n + 1 ] / Aug [ n , n ] ) $
+print ( X [ n , 1 ] , "=" ) $
+display ( float ( Aug [ n , n + 1 ] ) / Aug [ n , n ] ) $
+
+i : n − 1 $
+while ( i >=  1 ) do (
+    X1 [ i , 1 ] : Aug [ i , n + 1 ] ,
+    for k : i + 1 thru n do (
+        X1 [ i , 1 ] : X1 [ i , 1 ] − Aug [ i , k ] · X1 [ k , 1 ]
+    ) ,
+    print ( "" ) ,
+    print ( X [ i , 1 ] , "=" ) ,
+    display ( X1 [ i , 1 ] / Aug [ i , i ] ) ,
+    X1 [ i , 1 ] : float ( X1 [ i , 1 ] / Aug [ i , i ] ) ,
+    i : i − 1
+) $
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Q3) Solve the system of equations
+2.x1 + 6.x2 - 3.x3 = 5
+6.x1 + 8.x2 + 7.x3 = 7
+3.x1 + 2.x2 + 1.x3 = 11
+using the Gauss elimination method.
+
+Ans.)
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+Kill ( all ) $
+keepfloat : true $
+' A = A : matrix (
+       [ 2 , 7 , -3 ] ,
+       [ 6 , 8 , 7 ] ,
+       [ 3 , 2 , 1 ] ) $
+' B = B : matrix (
+       [ 5 ] , [ 7 ] , [ 11 ] ) $
+' X = X : matrix (
+       [ ' x ] , [ ' y ] , [ ' z ] ) $
+
+print ( "Let" , ' A = A , "," , ' B = B , "," , ' X = X ) $
+print ( "" ) $
+print ( "Now, the augmented matrix will be," ) $
+print ( "" ) $
+' Aug = Aug : addcol ( A , B ) ;
+
+print ( "" ) $
+print ( "I. FORWARD ELIMINATION" ) $
+
+n : length ( A [ 1 ] ) $
+for k : 1 thru n − 1 do (
+    max_i : k ,
+    for i : k thru n do (
+        if abs ( Aug [ i , k ] ) > abs ( Aug [ max_i , k ] ) then max_i : i
+    ) ,
+    if max_i # k then (
+        [ Aug [ k ] , Aug [ max_i ] ] : [ Aug [ max_i ] , Aug [ k ] ] ,
+        print ( "" ) ,
+        print ( "=> R" , k , "< -- >" , "R" , max_i ) ,
+        print ( Aug )
+    ) ,
+    for i : k + 1 thru n do (
+        factor : Aug [ i , k ] / Aug [ k , k ] ,
+        print ( "" ) ,
+        print ( "=> R" , i , "= R" , i , "- (" , ' Aug [ i , k ] / ' Aug [ k , k ] , ")*" , "R" , k ) ,
+        Aug [ i ] : Aug [ i ] − factor · Aug [ k ] ,
+        print ( Aug )
+    )
+) $
+
+print ( "" ) $
+print ( "Therefore, the augmented matrix" ) $
+print ( "reduced to upper triangular form will be," ) $
+print ( "" ) $
+Aug ;
+
+print ( "" ) $
+print ( "Now, the system of equations will be," ) $
+load ( "eigen" ) $
+AA : innerproduct ( submatrix ( Aug , n + 1 ) , X ) $
+BB : col ( Aug , n + 1 ) $
+for i : 1 thru n do (
+    print ( AA [ i , 1 ] = BB [ i , 1 ] )
+) $
+
+print ( "" ) $
+print ( "II. BACKWARD SUSTITUTION" ) $
+print ( "" ) $
+
+X1 : zeromatrix ( n , 1 ) $
+X1 [ n , 1 ] : float ( Aug [ n , n + 1 ] / Aug [ n , n ] ) $
+print ( X [ n , 1 ] , "=" ) $
+display ( float ( Aug [ n , n + 1 ] ) / Aug [ n , n ] ) $
+
+i : n − 1 $
+while ( i >=  1 ) do (
+    X1 [ i , 1 ] : Aug [ i , n + 1 ] ,
+    for k : i + 1 thru n do (
+        X1 [ i , 1 ] : X1 [ i , 1 ] − Aug [ i , k ] · X1 [ k , 1 ]
+    ) ,
+    print ( "" ) ,
+    print ( X [ i , 1 ] , "=" ) ,
+    display ( X1 [ i , 1 ] / Aug [ i , i ] ) ,
+    X1 [ i , 1 ] : float ( X1 [ i , 1 ] / Aug [ i , i ] ) ,
+    i : i − 1
+) $
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: title   start ]
+4(b). Gauss Jordan Method:
+   [wxMaxima: title   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Q1.Solve the following system of equations
+2.x1 -  1.x2 + x3 = -1
+1.x1 + 2x2 - 1.x3 = 6
+1.x1 - 1.x2 + 2.x3 = -3
+using the Gauss-Jordan method.
+
+Ans.)
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill ( all ) $
+keepfloat : true $
+A : matrix (                   
+       [ 2  , -1  ,  1 ] ,
+       [ 1  , 2  , -1  ] ,
+       [ 1  , -1 , 2   ] ) $
+B : matrix (                  
+       [ -1  ] , [ 6  ] , [ 3 ] ) $
+X : matrix (                  
+       [ x ] , [ y ] , [ z ] ) $
+print ( "Now, the augmented matrix will be," ) $
+Aug : addcol ( A , B ) ;            
+print ( " " ) ;
+print ( "Now, the Echelon Form is," ) $
+S : echelon ( Aug ) ;          
+print ( " " ) ;
+print ( "R2 -> R2 - " , float ( S [ 2 ] [ 3 ] ) , " * R3" ) $
+S [ 2 ] : S [ 2 ] − S [ 2 ] [ 3 ] . S [ 3 ] $
+S ;
+print ( " " ) ;
+print ( "R1 -> R1 - " , float ( S [ 1 ] [ 3 ] ) , " * R3" ) $
+S [ 1 ] : S [ 1 ] − S [ 1 ] [ 3 ] . S [ 3 ] $
+S ;
+print ( " " ) ;
+print ( "R1 -> R1 - " , float ( S [ 1 ] [ 2 ] ) , " * R2" ) $
+S [ 1 ] : S [ 1 ] − S [ 1 ] [ 2 ] . S [ 2 ] $
+S ;
+print ( " " ) ;
+print ( "The Solution Matrix is: " ) $
+X = col ( S , 4 ) ;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Q2.Solve the following system of equations
+4.x1 -  3.x2 + 1x3 = 1
+2.x1 + 2x2 + 1.x3 = 2
+3.x1 - 2.x2 + 4.x3 = -3
+using the Gauss-Jordan method.
+
+Ans.)
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill ( all ) $
+keepfloat : true $
+A : matrix (                   
+       [ 1  , 2  , 3 ] ,
+       [ 2  , 6  ,  10  ] ,
+       [ 3  , 14 ,  28   ] ) $
+B : matrix (                  
+       [ 1  ] , [  0 ] , [ -8 ] ) $
+X : matrix (                  
+       [ x ] , [ y ] , [ z ] ) $
+print ( "Now, the augmented matrix will be," ) $
+Aug : addcol ( A , B ) ;            
+print ( " " ) ;
+print ( "Now, the Echelon Form is," ) $
+S : echelon ( Aug ) ;          
+print ( " " ) ;
+print ( "R2 -> R2 - " , float ( S [ 2 ] [ 3 ] ) , " * R3" ) $
+S [ 2 ] : S [ 2 ] − S [ 2 ] [ 3 ] . S [ 3 ] $
+S ;
+print ( " " ) ;
+print ( "R1 -> R1 - " , float ( S [ 1 ] [ 3 ] ) , " * R3" ) $
+S [ 1 ] : S [ 1 ] − S [ 1 ] [ 3 ] . S [ 3 ] $
+S ;
+print ( " " ) ;
+print ( "R1 -> R1 - " , float ( S [ 1 ] [ 2 ] ) , " * R2" ) $
+S [ 1 ] : S [ 1 ] − S [ 1 ] [ 2 ] . S [ 2 ] $
+S ;
+print ( " " ) ;
+print ( "The Solution Matrix is: " ) $
+X = col ( S , 4 ) ;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Q3.Solve the following system of equations
+4.x1 -  6.x2 + 4x3 = 3
+3.x1 + 2x2 - 1.x3 = 6
+2.x1 - 1.x2 + 4.x3 = 2
+using the Gauss-Jordan method.
+
+Ans.)
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill ( all ) $
+keepfloat : true $
+A : matrix (                   
+       [ 4  , -6  ,  4 ] ,
+       [ 3  , 2  , -1  ] ,
+       [ 2  , -1 , 4  ] ) $
+B : matrix (                  
+       [ 3  ] , [ 6  ] , [ 2 ] ) $
+X : matrix (                  
+       [ x ] , [ y ] , [ z ] ) $
+print ( "Now, the augmented matrix will be," ) $
+Aug : addcol ( A , B ) ;            
+print ( " " ) ;
+print ( "Now, the Echelon Form is," ) $
+S : echelon ( Aug ) ;          
+print ( " " ) ;
+print ( "R2 -> R2 - " , float ( S [ 2 ] [ 3 ] ) , " * R3" ) $
+S [ 2 ] : S [ 2 ] − S [ 2 ] [ 3 ] . S [ 3 ] $
+S ;
+print ( " " ) ;
+print ( "R1 -> R1 - " , float ( S [ 1 ] [ 3 ] ) , " * R3" ) $
+S [ 1 ] : S [ 1 ] − S [ 1 ] [ 3 ] . S [ 3 ] $
+S ;
+print ( " " ) ;
+print ( "R1 -> R1 - " , float ( S [ 1 ] [ 2 ] ) , " * R2" ) $
+S [ 1 ] : S [ 1 ] − S [ 1 ] [ 2 ] . S [ 2 ] $
+S ;
+print ( " " ) ;
+print ( "The Solution Matrix is: " ) $
+X = col ( S , 4 ) ;
+/* [wxMaxima: input   end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 22.04.0"$
